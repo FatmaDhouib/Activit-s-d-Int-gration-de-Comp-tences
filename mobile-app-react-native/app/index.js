@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator, SafeAreaView, Platform } from 'react-native';
 
 export default function App() {
   const [etudiants, setEtudiants] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 10.0.2.2 is the localhost alias for Android Emulator
-    fetch('http://10.0.2.2:8080/api/etudiants')
+    // Use localhost for Web, and 10.0.2.2 for Android Emulator
+    const apiUrl = Platform.OS === 'web' 
+      ? 'http://localhost:8080/api/etudiants' 
+      : 'http://10.0.2.2:8080/api/etudiants';
+
+    fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
         setEtudiants(data);
