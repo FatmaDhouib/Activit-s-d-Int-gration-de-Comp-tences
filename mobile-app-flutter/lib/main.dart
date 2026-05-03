@@ -64,7 +64,7 @@ class _EtudiantsPageState extends State<EtudiantsPage> {
   Future<List<Etudiant>> fetchEtudiants() async {
     // Replace 10.0.2.2 with your API IP if running on physical device
     // 10.0.2.2 is the localhost alias for Android Emulator
-    final response = await http.get(Uri.parse('http://10.0.2.2:8080/api/etudiants'));
+    final response = await http.get(Uri.parse('http://localhost:8080/api/etudiants'));
 
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(utf8.decode(response.bodyBytes));
